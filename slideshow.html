@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            height:500px;
+            width:100%;
+            border:1px solid black;
+
+        }
+        #slideshow{
+            display:grid;
+            
+            height:80%;
+            width:100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="slideshow">
+            <img src="https://tse2.mm.bing.net/th?id=OIP.ZV2mtwuPNm7ZGZIvyqxa_AHaEK&pid=Api&P=0&h=180" alt="">
+            <img src="https://tse4.mm.bing.net/th?id=OIP.yDGyF5ilkz79MsRuvTjIzgHaEn&pid=Api&P=0&h=180" alt="">
+            <img src="https://tse2.explicit.bing.net/th?id=OIP.BEqUeBE4fdTRT5Xqr-pigQHaFS&pid=Api&P=0&h=180" alt="">
+            <img src="https://tse1.mm.bing.net/th?id=OIP.Jrl3SdtguzuHr-WWXgE6PgHaE-&pid=Api&P=0&h=180" alt="">
+            <img src="https://tse3.mm.bing.net/th?id=OIP.0vKlrtrVRgRCghoTaT7B1AHaEo&pid=Api&P=0&h=180" alt="">
+            <img src="https://tse2.mm.bing.net/th?id=OIP.A0MRPhdadTvNJ8fXNnSyNQEsDW&pid=Api&P=0&h=180" alt="">
+            <img src="https://tse2.mm.bing.net/th?id=OIP.7nbyiWMWiMxBp-CFmvBosAHaEo&pid=Api&P=0&h=180" alt="">
+            <img src="https://tse4.mm.bing.net/th?id=OIP._B6Qmj9b_RkGcDl-wgM6HgHaGX&pid=Api&P=0&h=180" alt="">
+            <img src="https://tse1.mm.bing.net/th?id=OIP.UONSF3f8nVVqP5ralacbkQHaDX&pid=Api&P=0&h=180" alt="">
+            <img src="https://tse3.mm.bing.net/th?id=OIP.TnI1HbRIIiPIFqkygpCpIAHaDL&pid=Api&P=0&h=180" alt="">
+
+        </div>
+        <button onclick="toggle()">Start/Stop</button>
+        <button onclick="prev()">Previous</button>
+        <button onclick="next()">Next</button>
+    </div>
+</body>
+<script>
+    let slides=document.querySelectorAll('#slideshow img');
+    let slideInterval;
+    let slideIndex=0;
+
+    function showSlide(index){
+        slides.forEach((slide,i)=>{
+            if(i === index){
+                slide.style.display='block;'
+            }
+            else{
+                slide.style.display='none';
+            }
+        })
+    }
+    function startSlideShow(){
+        slideInterval=setInterval(function(){
+            slideIndex=(slideIndex + 1)% slides.length;
+            showSlide(slideIndex);
+    
+        },1000)
+    }
+    function stopSlideShow(){
+        clearInterval(slideInterval);
+    }
+    function toggle(){
+        if(slideInterval){
+            stopSlideShow();
+            slideInterval=null
+        }
+        else{
+            startSlideShow();
+        }
+    }
+    function next(){
+        stopSlideShow();
+        slideIndex=(slideIndex + 1)% slides.length;
+            showSlide(slideIndex);
+    }
+    function prev(){
+        stopSlideShow();
+        slideIndex=(slideIndex - 1)% slides.length;
+            showSlide(slideIndex);
+    }
+</script>
+</html>
